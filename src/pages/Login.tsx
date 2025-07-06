@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 // Giriş yanıtı tipi tanımı
 interface LoginResponse {
@@ -13,7 +14,7 @@ interface LoginResponse {
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const navigate = useNavigate();
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -25,6 +26,8 @@ const Login = () => {
 
             localStorage.setItem('token', res.data.token);
             alert('Giriş başarılı!');
+            localStorage.setItem('token', res.data.token);
+            navigate('/tasks');
 
             // TODO: Görev listesine yönlendirme yapılabilir
         } catch (err: any) {
